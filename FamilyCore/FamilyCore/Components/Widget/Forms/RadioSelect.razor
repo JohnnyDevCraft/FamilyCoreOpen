@@ -6,22 +6,24 @@
 
 <div class="mb-4">
   <label class="block text-sm mb-2 text-[color:var(--color-text-muted-dark)]">@LabelText</label>
-  <InputRadioGroup TValue="string" Value="Value" ValueChanged="OnInternalChanged" ValueExpression="ValueExpression" class="flex flex-col space-y-2">
-    @if (Options != null)
-    {
-        foreach (var kv in Options)
-        {
-            var optValue = kv.Value?.ToString();
-            <label class="inline-flex items-center text-sm text-[color:var(--color-text-muted-dark)]">
-              <InputRadio TValue="string"
-                          Value="@optValue"
-                          class="text-[color:var(--color-primary-500)] focus:ring-[color:var(--color-primary-400)] h-4 w-4"
-                          disabled="@Disabled" />
-              <span class="ml-2">@kv.Key</span>
-            </label>
-        }
-    }
-  </InputRadioGroup>
+  <div class="flex flex-col gap-2">
+    <InputRadioGroup TValue="string" Value="Value" ValueChanged="OnInternalChanged" ValueExpression="ValueExpression">
+      @if (Options != null)
+      {
+          foreach (var kv in Options)
+          {
+              var optValue = kv.Value?.ToString();
+              <label class="inline-flex items-center text-sm text-[color:var(--color-text-muted-dark)]">
+                <InputRadio TValue="string"
+                            Value="@optValue"
+                            class="text-[color:var(--color-primary-500)] focus:ring-[color:var(--color-primary-400)] h-4 w-4"
+                            disabled="@Disabled" />
+                <span class="ml-2">@kv.Key</span>
+              </label>
+          }
+      }
+    </InputRadioGroup>
+  </div>
 </div>
 
 @code {

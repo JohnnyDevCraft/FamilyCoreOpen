@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+@import "./tailwind.components.css";
+
+/* Optional: explicitly tell Tailwind where to look for classes */
+@source "../../**/*.razor";
+@source "../../**/*.cshtml";
+@source "../../**/*.html";
+
+
+/* Design tokens for Family Center */
+@theme {
+    /* PRIMARY – Warm Gold */
+    --color-primary-100: #FFF8E6;
+    --color-primary-200: #FFEAB3;
+    --color-primary-300: #FFD980;
+    --color-primary-400: #FFC74D;
+    --color-primary-500: #FFB400; /* main */
+    --color-primary-600: #E5A200;
+    --color-primary-700: #CC9000;
+    --color-primary-800: #B37E00;
+    --color-primary-900: #8F6500;
+
+    /* SECONDARY – Soft Orange */
+    --color-secondary-100: #FFF3E8;
+    --color-secondary-200: #FFE0C2;
+    --color-secondary-300: #FFCD9C;
+    --color-secondary-400: #FFB876;
+    --color-secondary-500: #FF9F45; /* main */
+    --color-secondary-600: #E58F3E;
+    --color-secondary-700: #CC8037;
+    --color-secondary-800: #B37130;
+    --color-secondary-900: #8F5B26;
+
+    /* TERTIARY – Teal Green */
+    --color-tertiary-100: #E9F7F4;
+    --color-tertiary-200: #C7EBE3;
+    --color-tertiary-300: #A3DDD1;
+    --color-tertiary-400: #7FCCBF;
+    --color-tertiary-500: #51B8A7; /* main */
+    --color-tertiary-600: #47A495;
+    --color-tertiary-700: #3D9083;
+    --color-tertiary-800: #347B70;
+    --color-tertiary-900: #285F57;
+
+    /* ACCENT 1 – Soft Purple */
+    --color-accent-1-100: #F5F1FA;
+    --color-accent-1-200: #E4DAF3;
+    --color-accent-1-300: #D2C3EC;
+    --color-accent-1-400: #BFAAE5;
+    --color-accent-1-500: #A088D9; /* main */
+    --color-accent-1-600: #8F78C3;
+    --color-accent-1-700: #7E69AD;
+    --color-accent-1-800: #6C5897;
+    --color-accent-1-900: #544373;
+
+    /* ACCENT 2 – Deep Indigo */
+    --color-accent-2-100: #EEF1F8;
+    --color-accent-2-200: #CED6EA;
+    --color-accent-2-300: #AEBBDB;
+    --color-accent-2-400: #8EA0CC;
+    --color-accent-2-500: #5C75B0; /* main */
+    --color-accent-2-600: #50689D;
+    --color-accent-2-700: #455B8A;
+    --color-accent-2-800: #3A4E76;
+    --color-accent-2-900: #2C3A57;
+
+    /* TEXT COLORS */
+    --color-text-light: #FFFFFF;
+    --color-text-dark: #1A1A1A;
+    --color-text-muted-light: #F0F0F0;
+    --color-text-muted-dark: #6B6B6B;
+
+    /* BACKGROUND COLORS */
+
+    --color-bg-primary: #FFF9ED;
+    --color-bg-primary-muted: #FFF3DA;
+
+    --color-bg-secondary: #FFF5EE;
+    --color-bg-secondary-muted: #FFE9D6;
+
+    --color-bg-tertiary: #F2FBF9;
+    --color-bg-tertiary-muted: #E4F6F2;
+
+    --color-bg-accent-1: #F8F5FC;
+    --color-bg-accent-1-muted: #EEE7F7;
+
+    --color-bg-accent-2: #F4F6FB;
+    --color-bg-accent-2-muted: #E7EBF4;
+
+    --color-bg-light: #FAFAFA; /* light theme */
+    --color-bg-dark: #121212;  /* dark theme */
+
+
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Optional weight tokens (if you want semantic control) */
+    --font-heading-light: 300;
+    --font-heading-normal: 400;
+    --font-heading-medium: 500;
+    --font-heading-semibold: 600;
+    --font-heading-bold: 700;
+
+    --font-body-light: 300;
+    --font-body-normal: 400;
+    --font-body-medium: 500;
+}
+

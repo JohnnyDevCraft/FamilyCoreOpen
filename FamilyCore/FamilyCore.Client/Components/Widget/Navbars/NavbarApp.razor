@@ -1,0 +1,81 @@
+@using Microsoft.AspNetCore.Components
+
+<nav class="flex items-center justify-between p-4 rounded-md mb-6 shadow-sm" style="background-color: var(--color-bg-tertiary);">
+  <div class="flex items-center space-x-3">
+    <img src="/images/logo-wide.png" alt="FamilyCenter" class="h-8" />
+    <div class="text-sm text-[color:var(--color-text-muted-dark)]">Application</div>
+  </div>
+  <div class="flex items-center space-x-4">
+    <button type="button" class="relative p-2 rounded-full hover:bg-[color:var(--color-bg-tertiary-muted)]">
+      <img src="/images/bell.png" alt="Notifications" class="w-5 h-5" />
+      <span class="absolute -top-1 -right-1 inline-flex items-center justify-center h-4 w-4 rounded-full bg-[color:var(--color-primary-500)] text-white text-[10px] leading-none">@NotificationCount</span>
+    </button>
+
+    <div class="relative">
+      <button type="button"
+              class="flex items-center space-x-3 px-2 py-1 rounded-md hover:bg-[color:var(--color-bg-tertiary-muted)]"
+              @onclick="ToggleUserMenu">
+        <img src="@UserAvatarUrl" alt="@UserName" class="w-10 h-10 rounded-full object-cover border border-[color:var(--color-border-muted)]" />
+        <div class="text-left leading-tight">
+          <div class="text-sm font-semibold" style="font-family: var(--font-heading);">@UserName</div>
+          <div class="text-xs text-[color:var(--color-text-muted-dark)]">@UserEmail</div>
+        </div>
+        <span class="text-xs text-[color:var(--color-text-muted-dark)]">v</span>
+      </button>
+
+      @if (IsUserMenuOpen)
+      {
+        <div class="absolute right-0 mt-2 w-48 rounded-md shadow-lg border border-[color:var(--color-border-muted)] bg-white z-10">
+          <button class="block w-full text-left px-4 py-2 text-sm hover:bg-[color:var(--color-bg-primary-muted)]" @onclick="HandleLogout">Log Out</button>
+          <button class="block w-full text-left px-4 py-2 text-sm hover:bg-[color:var(--color-bg-primary-muted)]" @onclick="HandleProfile">Profile</button>
+          <button class="block w-full text-left px-4 py-2 text-sm hover:bg-[color:var(--color-bg-primary-muted)]" @onclick="HandleSwitchFamily">Switch Family</button>
+        </div>
+      }
+    </div>
+  </div>
+</nav>
+
+@code {
+    [Parameter] public string UserName { get; set; } = "Alex Johnson";
+    [Parameter] public string UserEmail { get; set; } = "alex.johnson@example.com";
+    [Parameter] public string UserAvatarUrl { get; set; } = "/images/logo-icon.png";
+    [Parameter] public int NotificationCount { get; set; } = 3;
+
+    [Parameter] public EventCallback OnLogout { get; set; }
+    [Parameter] public EventCallback OnProfile { get; set; }
+    [Parameter] public EventCallback OnSwitchFamily { get; set; }
+
+    bool IsUserMenuOpen { get; set; }
+
+    void ToggleUserMenu()
+    {
+        IsUserMenuOpen = !IsUserMenuOpen;
+    }
+
+    async Task HandleLogout()
+    {
+        IsUserMenuOpen = false;
+        if (OnLogout.HasDelegate)
+        {
+            await OnLogout.InvokeAsync();
+        }
+    }
+
+    async Task HandleProfile()
+    {
+        IsUserMenuOpen = false;
+        if (OnProfile.HasDelegate)
+        {
+            await OnProfile.InvokeAsync();
+        }
+    }
+
+    async Task HandleSwitchFamily()
+    {
+        IsUserMenuOpen = false;
+        if (OnSwitchFamily.HasDelegate)
+        {
+            await OnSwitchFamily.InvokeAsync();
+        }
+    }
+}

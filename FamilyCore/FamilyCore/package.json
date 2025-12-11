@@ -1,0 +1,13 @@
+{
+  "name": "FamilyCore",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.17"
+  },
+  "scripts": {
+    "tailwind:build": "tailwindcss -i ./Styles/tailwind.input.css -o ./wwwroot/app.css --minify",
+    "tailwind:watch": "tailwindcss -i ./Styles/tailwind.input.css -o ./wwwroot/app.css --watch"
+  }
+}

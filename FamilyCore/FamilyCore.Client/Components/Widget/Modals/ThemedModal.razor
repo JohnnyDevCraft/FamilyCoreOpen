@@ -1,0 +1,108 @@
+@using FamilyCore.Client.Components.Widget.Shared
+@using FamilyCore.Client.UiModels
+
+@if (IsOpen)
+{
+    <div class="fixed inset-0 z-40 flex items-center justify-center">
+        <button type="button"
+                class="absolute inset-0 bg-black/40"
+                aria-label="Close modal"
+                @onclick="HandleClose"></button>
+
+        <div class="relative z-50 w-full max-w-lg mx-4">
+            <div class="relative">
+                <ThemePanel ColorType="@ColorType">
+                    <Header>
+                        <TitleGroup Title="@Title" Subtitle="@Subtitle"></TitleGroup>
+                    </Header>
+                    
+                    <ChildContent>
+                        @ChildContent
+                    </ChildContent>
+                    
+                    <Footer>
+                        @if (AllowCancel || Actions.Count > 0)
+                        {
+                            <div class="flex flex-row justify-between">
+                                <div class="flex flex-row justify-start">
+                                    @if (AllowCancel)
+                                    {
+                                        <ThemedButton Type="button"
+                                                      Variant="ButtonVariant.Ghost"
+                                                      Color="ThemeColor.Primary"
+                                                      Size="ButtonSize.Small"
+                                                      AdditionalClasses="ml-2 px-4 py-2 flex flex-row justify-start items-center"
+                                                      OnClick="HandleClose">
+                                            Cancel
+                                        </ThemedButton>
+                                    }
+                                </div>
+                                <div class="flex flex-row justify-end">
+                                    @if (Actions.Count > 0)
+                                    {
+                                        @foreach (var action in Actions)
+                                        {
+                                            <ThemedButton Type="button"
+                                                          Variant="ButtonVariant.Solid"
+                                                          Color="ThemeColor.Primary"
+                                                          Size="ButtonSize.Small"
+                                                          AdditionalClasses="ml-2 px-4 py-2 flex flex-row justify-start items-center"
+                                                          OnClick="() => DoAction(action.Delegate)">
+                                                @if (!string.IsNullOrWhiteSpace(action.Icon))
+                                                {
+                                                    <img class="w-4 h-4 mr-2" src="@action.Icon" alt="@action.Icon"/>
+                                                }
+                                                <p>@action.Title</p>
+                                            </ThemedButton>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </Footer>
+                </ThemePanel>
+
+                <ThemedButton Type="button"
+                              Variant="ButtonVariant.Ghost"
+                              Color="ThemeColor.Tertiary"
+                              AdditionalClasses="absolute top-3 right-3 rounded-full p-1 text-sm text-[color:var(--color-text-muted-dark)] hover:text-[color:var(--color-text-strong)]"
+                              aria-label="Close modal"
+                              OnClick="HandleClose">
+                    ✕
+                </ThemedButton>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public bool AllowCancel { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    [Parameter] public ThemeColor ColorType { get; set; } = ThemeColor.Primary;
+    [Parameter] public required string Title { get; set; }
+    [Parameter] public string? Subtitle { get; set; }
+
+    [Parameter] public List<ActionButton> Actions { get; set; } = [];
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private List<ActionButton> HeaderActions = [];
+
+    async Task HandleClose()
+    {
+        if (OnClose.HasDelegate)
+        {
+            await OnClose.InvokeAsync();
+        }
+
+        
+        this.IsOpen = false;
+    }
+    
+    void DoAction(Action? action)
+    {
+        action?.Invoke();
+        this.IsOpen = false;
+    }
+}

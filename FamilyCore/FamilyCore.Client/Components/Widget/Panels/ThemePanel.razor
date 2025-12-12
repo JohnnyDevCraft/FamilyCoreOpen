@@ -1,0 +1,39 @@
+@using Microsoft.AspNetCore.Components
+
+<div class="p-4 rounded-md shadow-sm flex flex-col gap-3 justify-start items-start @BackgroundClass">
+    @if (Header is not null)
+    {
+        @Header
+    }
+
+    @if (ChildContent is not null)
+    {
+        <div class="mt-6 w-full">
+            @ChildContent 
+        </div>
+        
+    }
+
+    @if (Footer is not null)
+    {
+        @Footer
+    }
+</div>
+
+@code {
+    [Parameter] public ThemeColor ColorType { get; set; } = ThemeColor.Primary;
+
+    [Parameter] public RenderFragment? Header { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public RenderFragment? Footer { get; set; }
+
+    string BackgroundClass => ColorType switch
+    {
+        ThemeColor.Primary => "bg-[color:var(--color-bg-primary)]",
+        ThemeColor.Secondary => "bg-[color:var(--color-bg-secondary)]",
+        ThemeColor.Tertiary => "bg-[color:var(--color-bg-tertiary)]",
+        ThemeColor.Accent1 => "bg-[color:var(--color-bg-accent-1)]",
+        ThemeColor.Accent2 => "bg-[color:var(--color-bg-accent-2)]",
+        _ => "bg-[color:var(--color-bg-primary)]"
+    };
+}

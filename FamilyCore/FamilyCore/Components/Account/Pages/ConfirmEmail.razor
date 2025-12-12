@@ -4,14 +4,29 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.WebUtilities
 @using FamilyCore.Data
+@using FamilyCore.Client.Components.Widget.Buttons
 
 @inject UserManager<ApplicationUser> UserManager
 @inject IdentityRedirectManager RedirectManager
 
 <PageTitle>Confirm email</PageTitle>
 
-<h1>Confirm email</h1>
-<StatusMessage Message="@statusMessage"/>
+<div class="max-w-3xl mx-auto py-12">
+    <div class="p-8 rounded-xl shadow bg-white border border-[color:var(--color-border-muted)] space-y-4 text-center">
+        <div class="space-y-2">
+            <p class="text-sm font-semibold tracking-wide text-[color:var(--color-text-muted-dark)] uppercase">Email confirmation</p>
+            <h1 class="text-3xl font-bold text-[color:var(--color-text-strong)]">Confirm your account</h1>
+            <p class="text-[color:var(--color-text-muted-dark)]">We’re activating your Family Center access. This keeps your finances, chores, and schedules secure.</p>
+        </div>
+
+        <StatusMessage Message="@statusMessage"/>
+
+        <div class="flex justify-center gap-3 pt-2">
+            <ThemedButton Color="ThemeColor.Primary" OnClick="GoToLogin">Go to login</ThemedButton>
+            <ThemedButton Variant="ButtonVariant.Outline" Color="ThemeColor.Primary" OnClick="GoToResend">Resend email</ThemedButton>
+        </div>
+    </div>
+</div>
 
 @code {
     private string? statusMessage;
@@ -44,4 +59,6 @@
         }
     }
 
+    void GoToLogin() => RedirectManager.RedirectTo("Account/Login");
+    void GoToResend() => RedirectManager.RedirectTo("Account/ResendEmailConfirmation");
 }

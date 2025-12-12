@@ -1,8 +1,14 @@
-﻿@inherits LayoutComponentBase
+﻿@using FamilyCore.Client.Components.Widget.Navbars
+@using FamilyCore.Client.Components.Widget.Footers
+@inherits LayoutComponentBase
 
 <!-- Apply body-level font and background using CSS variables from tailwind.input.css -->
-<div class="min-h-screen" style="font-family: var(--font-body); background-color: var(--color-bg-light); color: var(--color-text-dark);">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    @Body
-  </div>
+<div class="min-h-screen flex flex-col" style="font-family: var(--font-body); background-color: var(--color-bg-light); color: var(--color-text-dark);">
+  <NavbarPublic />
+  <main class="flex-1">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      @Body
+    </div>
+  </main>
+  <FooterPublic />
 </div>

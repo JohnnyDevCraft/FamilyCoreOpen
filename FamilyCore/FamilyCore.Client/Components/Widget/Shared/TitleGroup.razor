@@ -1,0 +1,72 @@
+@using System.Diagnostics
+@using FamilyCore.Client.UiModels
+<div class="flex flex-row justify-between items-center gap-2 w-full">
+    @if (string.IsNullOrEmpty(Subtitle))
+    {
+        <div class="flex flex-col h-full justify-center ">
+            <h2 class="text-lg font-heading-black @GetThemeColors().TextColor">@Title</h2>
+        </div>
+    }
+    else
+    {
+        <div class="flex flex-col h-full justify-center items-start">
+            <h2 class="text-lg font-heading-black @GetThemeColors().TextColor">@Title</h2>
+            <h3 class="text-sm font-heading-light @GetThemeColors().MutedTextColor">@Subtitle</h3>
+        </div>
+    }
+    
+    @if (Actions is not null && Actions.Count > 0)
+    {
+        <div class="flex flex-row justify-end items-center gap-2 h-full">
+            @foreach (var action in Actions)
+            {
+                <ThemedButton Type="button"
+                              Variant="ButtonVariant.Solid"
+                              Color="action.Color"
+                              Size="ButtonSize.Small"
+                              AdditionalClasses="px-4 py-2 flex flex-row justify-start items-center"
+                              OnClick="() => action.Delegate?.Invoke()">
+                    @if (!string.IsNullOrWhiteSpace(action.Icon))
+                    {
+                        <img class="w-4 h-4 mr-2" src="@GetImagePath(action.Icon)" alt="@action.Icon"/>
+                    }
+                    @action.Title
+                </ThemedButton>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public ThemeColor? Color { get; set; } = null;
+    [Parameter] public string Title { get; set; } = "Title";
+    [Parameter] public string? Subtitle { get; set; } = null;
+    
+    [Parameter] public List<ActionButton>? Actions { get; set; }  = null;
+    
+    private string GetImagePath(string iconName)
+    {
+        return $"./images/{iconName}.png";
+    }
+
+    private (string TextColor, string MutedTextColor, string BaseColor) GetThemeColors()
+    {
+        if(Color == null)return ("text-text-dark", "text-text-muted", "white");
+        
+        switch (Color)
+        {
+            case ThemeColor.Primary:
+                return ("text-primary-900", "text-primary-700", "primary-500");
+            case ThemeColor.Secondary:
+                return ("text-secondary-900", "text-secondary-700", "secondary-500");
+            case ThemeColor.Tertiary:
+                return ("text-tertiary-900", "text-tertiary-700", "tertiary-500");
+            case ThemeColor.Accent1:
+                return ("text-accent-1-900", "text-accent-1-700", "accent-1-500");
+            case ThemeColor.Accent2:
+                return ("text-accent-2-900", "text-accent-2-700", "accent-2-500");
+            default:
+                throw new ArgumentOutOfRangeException(nameof(Color), Color, null);
+        }
+    }
+}

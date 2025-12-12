@@ -91,6 +91,10 @@
     --color-bg-light: #FAFAFA; /* light theme */
     --color-bg-dark: #121212;  /* dark theme */
 
+    /* BORDER COLORS */
+    --color-border: #e5e7eb;
+    --color-border-muted: #e5e7eb;
+
 
     --font-heading: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -106,4 +110,3 @@
     --font-body-normal: 400;
     --font-body-medium: 500;
 }
-

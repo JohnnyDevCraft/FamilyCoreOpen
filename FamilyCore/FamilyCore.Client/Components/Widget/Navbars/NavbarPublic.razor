@@ -1,11 +1,15 @@
-<nav class="flex items-center justify-between p-4 rounded-md mb-4" style="background-color: var(--color-bg-accent-1);">
-  <div class="flex items-center space-x-3">
-    <img src="/images/logo-wide.png" alt="FamilyCenter" class="h-8" />
-    <div class="text-sm text-[color:var(--color-text-muted-dark)]">Public</div>
-  </div>
-  <div class="flex items-center space-x-2">
-    <a class="text-sm px-3 py-1 rounded hover:bg-[color:var(--color-bg-accent-1-muted)]" href="#">Docs</a>
-    <a class="text-sm px-3 py-1 rounded bg-[color:var(--color-primary-500)] text-white" href="#">Sign Up</a>
-    <a class="text-sm px-3 py-1 rounded border border-[color:var(--color-primary-500)] text-[color:var(--color-primary-500)]" href="#">Log In</a>
+<nav class="w-full p-4 rounded-md mb-4" style="background-color: var(--color-bg-accent-1);">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <img src="/images/logo-wide.png" alt="FamilyCenter" class="h-8" />
+      <div class="text-sm text-[color:var(--color-text-muted-dark)]">Public</div>
+    </div>
+    <div class="flex items-center space-x-2">
+      <a class="text-sm px-3 py-1 rounded hover:bg-[color:var(--color-bg-accent-1-muted)]" href="/demo">Demo</a>
+      <a class="text-sm px-3 py-1 rounded bg-[color:var(--color-primary-500)] text-white" href="/Account/Register">Sign Up</a>
+      <a class="text-sm px-3 py-1 rounded border border-[color:var(--color-primary-500)] text-[color:var(--color-primary-500)]" href="/Account/Login">Log In</a>
+    </div>
   </div>
 </nav>
+
+@code {}
